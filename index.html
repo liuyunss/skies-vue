@@ -50,17 +50,39 @@
 
     <div id="action" class="icon">
       <ol>
-        <img src="./images/icon/weixin.png" alt="" οnclick="window.open('weixin.html')" style="cursor: pointer;"/>
-        <img src="./images/icon/picture.png" alt="" οnclick="window.open('index.html')" style="cursor: pointer;"/>
-        <img src="./images/icon/map.png" alt="" οnclick="window.open('index.html')" style="cursor: pointer;"/>
+        <img src="./images/icon/weixin.png" alt="微信" οnclick="change('A')" style="cursor: pointer;"/>
+        <img src="./images/icon/picture.png" alt="图片" οnclick="change('B')" style="cursor: pointer;"/>
+        <img src="./images/icon/map.png" alt="地图" οnclick="change('C')" style="cursor: pointer;"/>
       </ol>
       <ol>
-        <img src="./images/icon/phone.png" alt="" οnclick="window.open('index.html')" style="cursor: pointer;"/>
-        <img src="./images/icon/duanxin.png" alt="" οnclick="window.open('index.html')" style="cursor: pointer;"/>
-        <img src="./images/icon/message.png" alt="" οnclick="window.open('index.html')" style="cursor: pointer;"/>
+        <img src="./images/icon/phone.png" alt="电话" οnclick="change('D')" style="cursor: pointer;"/>
+        <img src="./images/icon/duanxin.png" alt="" οnclick="change('E')" style="cursor: pointer;"/>
+        <img src="./images/icon/message.png" alt="" οnclick="change('F')" style="cursor: pointer;"/>
       </ol>
     </div>
   </div>
+
+<div id = "app2">
+    <div v-if="type === 'A' ">
+        A
+    </div>
+    <div v-else-if="type === 'B' ">
+        B
+    </div>
+    <div v-else-if="type === 'C' ">
+        A
+    </div>
+    <div v-else-if="type === 'D' ">
+        A
+    </div>
+    <div v-else-if="type === 'E' ">
+        A
+    </div>
+    <div v-else-if="type === 'F' ">
+        A
+    </div>
+</div>
+
   <script>
       var time1 = new Vue({
           el: "#time1",
@@ -91,6 +113,11 @@
           }
       })
       time1.countdown()
+
+      function change(data) {
+          this.type = data;
+      }
+
          // function:
   </script>
 </body>

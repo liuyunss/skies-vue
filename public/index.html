@@ -5,127 +5,122 @@
     <title>Title</title>
 </head>
 <style>
-  html,body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-  #demo{
-    width: 100%;
-    height: 50%;
-    margin: 0;
-    padding: 0;
-  }
-  #time1{
-    width: 100%;
-    height: 60%;
-    margin: 5%;
-  }
-  #time1 h1{
-    overflow-y:auto;
-    font-size: 60px;
-    color: red;
-    margin-top: 25%;
-    margin-left: 5%;
-  }
-  .icon img{
-    width: 20%;
-    height: 20%;
-    margin: 5%;
-    overflow-y:auto;
-  }
+    html,body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    #demo,.whole {
+        width: 100%;
+        height: 50%;
+        margin: 0;
+        padding: 0;
+    }
+    #time1{
+        width: 100%;
+        height: 60%;
+        margin: 5%;
+    }
+    #time1 h1{
+        overflow-y:auto;
+        font-size: 50px;
+        color: red;
+        margin-top: 25%;
+        margin-left: 5%;
+    }
+    .icon img{
+        width: 20%;
+        height: 20%;
+        margin: 5%;
+        overflow-y:auto;
+    }
 
 </style>
 
 <body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 
-  <div id = "demo">
-
-    <div id="time1" >
-      <h1>{{day}}天{{hr}}:{{min}}:{{sec}}</h1>
+<div id = "demo">
+    <!-- 首页 -->
+    <div id = "app1" class="whole" v-if="type === 'z' ">
+        <div id="time1" >
+            <h1>{{day}}天{{hr}}:{{min}}:{{sec}}</h1>
+        </div>
+        <div id="action" class="icon">
+            <ol>
+                <img src="./images/icon/weixin.png" alt="微信" @click="change('A')" style="cursor: pointer;"/>
+                <img src="./images/icon/picture.png" alt="图片" @click="change('B')" style="cursor: pointer;"/>
+                <img src="./images/icon/map.png" alt="地图" @click="change('C')" style="cursor: pointer;"/>
+            </ol>
+            <ol>
+                <img src="./images/icon/phone.png" alt="电话" @click="change('D')" style="cursor: pointer;"/>
+                <img src="./images/icon/duanxin.png" alt="" @click="change('E')" style="cursor: pointer;"/>
+                <img src="./images/icon/message.png" alt="" @click="change('F')" style="cursor: pointer;"/>
+            </ol>
+        </div>
     </div>
 
-    <div id="action" class="icon">
-      <ol>
-        <img src="./images/icon/weixin.png" alt="微信" οnclick="change('A')" style="cursor: pointer;"/>
-        <img src="./images/icon/picture.png" alt="图片" οnclick="change('B')" style="cursor: pointer;"/>
-        <img src="./images/icon/map.png" alt="地图" οnclick="change('C')" style="cursor: pointer;"/>
-      </ol>
-      <ol>
-        <img src="./images/icon/phone.png" alt="电话" οnclick="change('D')" style="cursor: pointer;"/>
-        <img src="./images/icon/duanxin.png" alt="" οnclick="change('E')" style="cursor: pointer;"/>
-        <img src="./images/icon/message.png" alt="" οnclick="change('F')" style="cursor: pointer;"/>
-      </ol>
+
+    <!--    <div id = "app2">-->
+    <div v-else-if="type === 'A'"  id = "app2" class="whole">
+        A
     </div>
-      <div>
-      <div v-if="type === 'A' ">
-          A
-      </div>
-      <div v-else-if="type === 'B' ">
-          B
-      </div>
-      <div v-else-if="type === 'C' ">
-          A
-      </div>
-      <div v-else-if="type === 'D' ">
-          A
-      </div>
-      <div v-else-if="type === 'E' ">
-          A
-      </div>
-      <div v-else-if="type === 'F' ">
-          A
-      </div>
+    <div v-else-if="type === 'B'"  id = "app3" class="whole">
+        B
+    </div>
+    <div v-else-if="type === 'C'" id = "app4" class="whole">
+        A
+    </div>
+    <div v-else-if="type === 'D'" id = "app5" class="whole">
+        A
+    </div>
+    <div v-else-if="type === 'E'" id = "app6" class="whole">
+        A
+    </div>
+    <div v-else-if="type === 'F'" id = "app7" class="whole">
+        A
+    </div>
+    <!--    </div>-->
 
-  </div>
+</div>
 
+<script>
+    var time1 = new Vue({
+        el: "#demo",
+        data:{
+            day: 0,//天
+            hr: 0,//时
+            min: 0,//分
+            sec: 0,//秒
+            type:"z",
 
-  <script>
-      var time1 = new Vue({
-          el: "#time1",
-          data:{
-                  day: 0,//天
-                  hr: 0,//时
-                  min: 0,//分
-                  sec: 0,//秒
-          },
-          methods: {
-              countdown: function () {
-                  const end = Date.parse(new Date("2020-03-12 00:00:00"));
-                  const now = Date.parse(new Date());
-                  const msec = end - now;
-                  let day = parseInt(msec / 1000 / 60 / 60 / 24);
-                  let hr = parseInt(msec / 1000 / 60 / 60 % 24);
-                  let min = parseInt(msec / 1000 / 60 % 60);
-                  let sec = parseInt(msec / 1000 % 60);
-                  this.day = day
-                  this.hr = hr > 9 ? hr : '0' + hr;
-                  this.min = min > 9 ? min : '0' + min;
-                  this.sec = sec > 9 ? sec : '0' + sec;
-                  const that = this;
-                  this._interval = setTimeout(function () {
-                      that.countdown()
-                  }, 1000)
-              }
-          }
-      })
-      time1.countdown()
-
-      var demo = new Vue({
-          el: "#demo",
-          data:{
-          },
-          methods: {
-              change: function (data) {
-                  '#demo'.type = data;
-              }
-          }
-      })
-
-         // function:
-  </script>
+        },
+        methods: {
+            countdown: function () {
+                const end = Date.parse(new Date("2020-03-12 00:00:00"));
+                const now = Date.parse(new Date());
+                const msec = end - now;
+                let day = parseInt(msec / 1000 / 60 / 60 / 24);
+                let hr = parseInt(msec / 1000 / 60 / 60 % 24);
+                let min = parseInt(msec / 1000 / 60 % 60);
+                let sec = parseInt(msec / 1000 % 60);
+                this.day = day
+                this.hr = hr > 9 ? hr : '0' + hr;
+                this.min = min > 9 ? min : '0' + min;
+                this.sec = sec > 9 ? sec : '0' + sec;
+                const that = this;
+                this._interval = setTimeout(function () {
+                    that.countdown()
+                }, 1000)
+            },
+            change:function (val) {
+                this.type = val;
+            }
+        }
+    })
+    time1.countdown();
+</script>
 </body>
 </html>
